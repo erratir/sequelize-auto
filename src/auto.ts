@@ -5,6 +5,7 @@ import { AutoBuilder } from "./auto-builder";
 import { AutoGenerator } from "./auto-generator";
 import { AutoRelater } from "./auto-relater";
 import { AutoWriter } from "./auto-writer";
+import { AutoWriterDto } from "./auto-writer-dto";
 import { dialects } from "./dialects/dialects";
 import { AutoOptions, TableData } from "./types";
 
@@ -53,6 +54,10 @@ export class SequelizeAuto {
     const tt = this.generate(td);
     td.text = tt;
     await this.write(td);
+    if (this.options.writeDto) {
+      const ttDto = this.generateDto(td)
+      await this.writeDto({ ...td, text: ttDto});
+    }
     return td;
   }
 
@@ -77,8 +82,19 @@ export class SequelizeAuto {
     return generator.generateText();
   }
 
+  generateDto(tableData: TableData) {
+    const dialect = dialects[this.sequelize.getDialect() as Dialect];
+    const generator = new AutoGenerator(tableData, dialect, this.options);
+    return generator.generateDtoText();
+  }
+
   write(tableData: TableData) {
     const writer = new AutoWriter(tableData, this.options);
+    return writer.write();
+  }
+
+  writeDto(tableData: TableData) {
+    const writer = new AutoWriterDto(tableData, {...this.options, directory: this.options.directory});
     return writer.write();
   }
 

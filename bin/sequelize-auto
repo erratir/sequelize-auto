@@ -111,6 +111,11 @@ const argv = require('yargs')
     type: 'boolean',
     alias: 'n'
   })
+  .option('writeDto', {
+    description: 'Writing the dto to disk',
+    type: 'boolean',
+    alias: 'dto'
+  })
   .option('schema', {
     description: 'Database schema from which to retrieve tables',
     type: 'string',
@@ -213,6 +218,7 @@ async function readPassword() {
   configFile.noAlias = argv.noAlias || configFile.noAlias || false;
   configFile.noInitModels = argv.noInitModels || configFile.noInitModels || false;
   configFile.noWrite = argv.noWrite || configFile.noWrite || false;
+  configFile.writeDto = argv.writeDto || configFile.writeDto || false;
   configFile.views = argv.views || configFile.views || false;
   configFile.singularize = argv.singularize || configFile.singularize || false;
   configFile.password = password || configFile.password || null;
