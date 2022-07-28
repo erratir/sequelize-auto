@@ -1,0 +1,12 @@
+# ignore all files
+*
+.*
+.*/
+
+# include all files in:
+!lib/
+!bin/
+!types
+!index.js
+!README.md
+!package.json

@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-auto",
+  "name": "sequelize-auto-fork",
   "version": "0.8.7",
   "publishConfig": {
     "tag": "latest"

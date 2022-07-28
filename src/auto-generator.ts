@@ -88,7 +88,7 @@ export class AutoGenerator {
       dtoStr += this.addTypeScriptFields(table, false);
 
       const re = new RegExp('#TABLE#', 'g');
-      dtoStr = dtoStr.replace(re, tableName)
+      dtoStr = dtoStr.replace(re, tableName + 'Dto')
       dtoStr += this.space[1] + "\n}\n"
       text[table] = dtoStr;
     })
