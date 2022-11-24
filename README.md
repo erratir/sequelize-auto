@@ -1,5 +1,27 @@
 # Sequelize-Auto
 
+Форк проекта - https://github.com/sequelize/sequelize-auto
+
+Добавлена опция `--writeDto`:
+```
+Options:
+--writeDto, --dto    Writing dto to disk                     [boolean]
+```
+
+В папке с моделями создает файлы `<table_name>.dto.ts`.
+
+>Зачем?
+
+Если в nestjs проекте, подключить плагин [@nestjs/swagger](https://docs.nestjs.com/openapi/cli-plugin),
+то он **на лету добавит декораторы @ApiProperty** к свойствам класса в `<table_name>.dto.ts`
+
+На основе сгенерированных DTO, создаем свои DTO [так](https://docs.nestjs.com/techniques/validation#mapped-types)
+```
+import { PartialType, PickType, OmitType, IntersectionType } from "@nestjs/swagger"
+```
+
+----
+
 <!-- [![Greenkeeper badge](https://badges.greenkeeper.io/sequelize/sequelize-auto.svg)](https://greenkeeper.io/) -->
 
 [![Build Status](http://img.shields.io/travis/sequelize/sequelize-auto/master.svg)](https://travis-ci.org/sequelize/sequelize-auto) [![Build status](https://ci.appveyor.com/api/projects/status/bf9lb89rmpj6iveb?svg=true)](https://ci.appveyor.com/project/durango/sequelize-auto) [![Code Climate](https://codeclimate.com/github/sequelize/sequelize-auto/badges/gpa.svg)](https://codeclimate.com/github/sequelize/sequelize-auto) [![Test Coverage](https://codeclimate.com/github/sequelize/sequelize-auto/badges/coverage.svg)](https://codeclimate.com/github/sequelize/sequelize-auto/coverage)

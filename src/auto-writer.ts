@@ -88,6 +88,7 @@ export class AutoWriter {
     // folders for each different schema.
     const [schemaName, tableName] = qNameSplit(table);
     const fileName = recase(this.options.caseFile, tableName, this.options.singularize);
+    // const filePath = path.join(this.options.directory, fileName + '.entity' + (this.options.lang === 'ts' ? '.ts' : '.js'));
     const filePath = path.join(this.options.directory, fileName + (this.options.lang === 'ts' ? '.ts' : '.js'));
 
     const writeFile = util.promisify(fs.writeFile);
@@ -130,6 +131,7 @@ export class AutoWriter {
     const modelNames: string[] = [];
     // import statements
     tables.forEach(t => {
+      // const fileName = recase(this.options.caseFile, t, this.options.singularize) + '.entity';
       const fileName = recase(this.options.caseFile, t, this.options.singularize);
       const modelName = makeTableName(this.options.caseModel, t, this.options.singularize, this.options.lang);
       modelNames.push(modelName);

@@ -185,6 +185,8 @@ export interface AutoOptions {
   pkSuffixes?: string[];
   /** Use `sequelize.define` instead of `init` for model initialization.  See issues #527, #559, #573 */
   useDefine: boolean;
+  /** Create initial DTO files for nestjs vs swagger project */
+  writeDto: boolean;
 }
 
 export type TSField = { special: string[]; elementType: string; } & ColumnDescription;

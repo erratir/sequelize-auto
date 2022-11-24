@@ -75,6 +75,27 @@ export class AutoGenerator {
     }
     return header;
   }
+  generateDtoText() {
+    const tableNames = _.keys(this.tables);
+    const text: { [name: string]: string; } = {};
+    // const header = "import { Model } from 'sequelize';\n\n";
+    tableNames.forEach(table => {
+      let dtoStr = '';
+      const [schemaName, tableNameOrig] = qNameSplit(table);
+      const tableName = makeTableName(this.options.caseModel, tableNameOrig, this.options.singularize, this.options.lang);
+
+      // dtoStr += "export class #TABLE# extends Model {\n";
+      dtoStr += "export class #TABLE# {\n";
+      dtoStr += this.addTypeScriptFields(table, false);
+
+      const re = new RegExp('#TABLE#', 'g');
+      dtoStr = dtoStr.replace(re, tableName + 'Dto')
+      dtoStr += this.space[1] + "\n}\n"
+      text[table] = dtoStr;
+    })
+
+    return text;
+  }
 
   generateText() {
     const tableNames = _.keys(this.tables);
